@@ -3,6 +3,7 @@ import Model.Character;
 import Model.Product;
 import Model.ValidationException;
 
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -79,6 +80,7 @@ public class Main {
                         filterCharacters(scanner);
                         break;
                     case "12":
+                        charsThatBoughtFromUniverse(scanner);
                         break;
                     case "13":
                         break;
@@ -89,6 +91,16 @@ public class Main {
                 System.out.println(e.getMessage());
             }
 
+        }
+    }
+
+    private void charsThatBoughtFromUniverse(Scanner scanner) {
+        System.out.println("Enter universe");
+        String universe = scanner.nextLine();
+        List<Character> characters = controller.charactersThatBoughtFromUniverse(universe);
+        List<Character> sortedChars = characters.stream().sorted(Comparator.comparing(Character::getName)).toList();
+        for (Character character : sortedChars) {
+            System.out.println(character);
         }
     }
 

@@ -14,6 +14,7 @@ public class Controller {
 
     /**
      * Constructor for the Controller
+     *
      * @param productRepository
      * @param characterRepository
      */
@@ -99,19 +100,31 @@ public class Controller {
             character.setRegion(region);
             characterRepository.update(character);
             return character;
-        }
-        else return null;
+        } else return null;
     }
 
     public boolean deleteCharacter(Integer id) {
         if (characterRepository.get(id) != null) {
             characterRepository.delete(id);
             return true;
-        }
-        else return false;
+        } else return false;
     }
 
     public List<Character> filterCharacters(String region) {
         return characterRepository.getAll().stream().filter(character -> character.getRegion().equals(region)).toList();
+    }
+
+    public List<Character> charactersThatBoughtFromUniverse(String universe) {
+        List<Character> characters = characterRepository.getAll();
+        List<Character> filteredCharacters = new ArrayList<>();
+        for (Character character : characters) {
+            for (Product product : character.getProducts()) {
+                if (product.getUniverse().equals(universe)) {
+                    filteredCharacters.add(character);
+                    break;
+                }
+            }
+        }
+        return filteredCharacters;
     }
 }
