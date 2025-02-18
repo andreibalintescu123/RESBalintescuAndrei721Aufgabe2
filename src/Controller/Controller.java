@@ -111,4 +111,7 @@ public class Controller {
         else return false;
     }
 
+    public List<Character> filterCharacters(String region) {
+        return characterRepository.getAll().stream().filter(character -> character.getRegion().equals(region)).toList();
+    }
 }

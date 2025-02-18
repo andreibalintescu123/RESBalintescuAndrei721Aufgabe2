@@ -34,7 +34,7 @@ public class Main {
                         8. Update Product
                         9. Remove Product
                         10. View All Products
-                        11. 
+                        11. Filter characters
                         12. 
                         13. 
                         0. Exit
@@ -76,6 +76,7 @@ public class Main {
                         viewProducts(scanner);
                         break;
                     case "11":
+                        filterCharacters(scanner);
                         break;
                     case "12":
                         break;
@@ -88,6 +89,15 @@ public class Main {
                 System.out.println(e.getMessage());
             }
 
+        }
+    }
+
+    private void filterCharacters(Scanner scanner) {
+        System.out.println("Enter region:");
+        String region = scanner.nextLine();
+        List<Character> filteredCharacters = controller.filterCharacters(region);
+        for (Character character : filteredCharacters) {
+            System.out.println(character.toString());
         }
     }
 
