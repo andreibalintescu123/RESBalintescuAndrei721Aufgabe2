@@ -36,8 +36,8 @@ public class Main {
                         9. Remove Product
                         10. View All Products
                         11. Filter characters
-                        12. 
-                        13. 
+                        12. Characters that bought from universe
+                        13. Sorted Products for character
                         0. Exit
                         Please select an option:
                         """);
@@ -83,6 +83,7 @@ public class Main {
                         charsThatBoughtFromUniverse(scanner);
                         break;
                     case "13":
+                        sortProductPricesOfCharacter(scanner);
                         break;
                     default:
                         throw new ValidationException("Invalid option");
@@ -93,7 +94,16 @@ public class Main {
 
         }
     }
-
+    private void sortProductPricesOfCharacter(Scanner scanner) {
+        System.out.println("Enter the Character ID:");
+        Integer id = Integer.parseInt(scanner.nextLine());
+        System.out.println("For the sort choose asc or desc:");
+        String order = scanner.nextLine();
+        List<Product> sortedProducts = controller.sortCharacterProducts(id,order);
+        for (Product product : sortedProducts){
+            System.out.println(product.toString());
+        }
+    }
     private void charsThatBoughtFromUniverse(Scanner scanner) {
         System.out.println("Enter universe");
         String universe = scanner.nextLine();

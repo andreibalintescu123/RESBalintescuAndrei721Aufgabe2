@@ -127,4 +127,17 @@ public class Controller {
         }
         return filteredCharacters;
     }
+
+    public List<Product> sortCharacterProducts(Integer id, String order) {
+        Character character = characterRepository.get(id);
+        List<Product> sortedProducts;
+        if (order.equals("asc")) {
+            character.getProducts().sort(Comparator.comparing(Product::getPrice));
+            sortedProducts = character.getProducts();
+            return sortedProducts;
+        } else if (order.equals("desc")) {
+            sortedProducts = character.getProducts().stream().sorted(Comparator.comparing(Product::getPrice).reversed()).toList();
+            return sortedProducts;
+        } else return null;
+    }
 }
