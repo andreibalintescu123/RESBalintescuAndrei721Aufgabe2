@@ -52,4 +52,8 @@ public class Character implements HasID{
     public String toString(){
         return "Character{" + "id=" + id + ", name=" + name + ", region=" + region + ", products=" + products + '}';
     }
+
+    public void kaufeProduct(Product product){
+        this.products.add(product);
+    }
 }

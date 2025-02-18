@@ -2,7 +2,9 @@ import Controller.Controller;
 import Model.Character;
 import Model.Product;
 import Model.ValidationException;
+import Repository.*;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
@@ -292,6 +294,47 @@ public class Main {
         }
     }
     public static void main(String[] args) {
-
+// Initialisierung der Producte
+        RepositoryProduct<Product> productRepository = new InMemoryRepositoryProduct<Product>();
+        Repository<Character> characterRepository = new InMemoryRepository<Character>();
+        List<Product> produkte = new ArrayList<>();
+        produkte.add(new Product("Mjolnir", 500.0, "Asgard"));
+        produkte.add(new Product("Vibranium-Schild", 700.0, "Wakanda"));
+        produkte.add(new Product("Infinity Gauntlet", 10000.0, "Titan"));
+        produkte.add(new Product("Web-Shooter", 250.0, "Terra"));
+        produkte.add(new Product("Arc-Reaktor", 1500.0, "Terra"));
+        produkte.add(new Product("Norn Stones", 1200.0, "Asgard"));
+        produkte.add(new Product("Quantum Suit", 3000.0, "Terra"));
+        produkte.add(new Product("X-Gene Serum", 850.0, "X-Mansion"));
+        produkte.add(new Product("Cosmic Cube", 9000.0, "Multiverse"));
+        produkte.add(new Product("Darkhold", 2000.0, "Multiverse"));
+// Initialisierung der Charactere
+        List<Character> charaktere = new ArrayList<>();
+        Character c1 = new Character(1, "Thor", "Asgard");
+        c1.kaufeProduct(produkte.get(0)); // Mjolnir
+        c1.kaufeProduct(produkte.get(5)); // Norn Stones
+        c1.kaufeProduct(produkte.get(9)); // Darkhold
+        Character c2 = new Character(2, "Black Panther", "Wakanda");
+        c2.kaufeProduct(produkte.get(1)); // Vibranium-Schild
+        c2.kaufeProduct(produkte.get(7)); // X-Gene Serum
+        Character c3 = new Character(3, "Iron Man", "Terra");
+        c3.kaufeProduct(produkte.get(4)); // Arc-Reaktor
+        c3.kaufeProduct(produkte.get(6)); // Quantum Suit
+        c3.kaufeProduct(produkte.get(3)); // Web-Shooter
+        Character c4 = new Character(4, "Spider-Man", "Terra");
+        c4.kaufeProduct(produkte.get(3)); // Web-Shooter
+        c4.kaufeProduct(produkte.get(8)); // Cosmic Cube
+        Character c5 = new Character(5, "Doctor Strange", "Multiverse");
+        c5.kaufeProduct(produkte.get(9)); // Darkhold
+        c5.kaufeProduct(produkte.get(8)); // Cosmic Cube
+        c5.kaufeProduct(produkte.get(2)); // Infinity Gauntlet
+        charaktere.add(c1);
+        charaktere.add(c2);
+        charaktere.add(c3);
+        charaktere.add(c4);
+        charaktere.add(c5);
+        Controller controller = new Controller(productRepository, characterRepository);
+        Main app = new Main(controller);
+        app.start();
     }
 }
